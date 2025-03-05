@@ -3,8 +3,6 @@
 
 # Atomic Volume Overlap Estimator (AVOE)
 
-License:
-
 ## 1. Overview
 
 Atomic Volume Overlap Estimator (AVOE) is a tool designed to estimate the overlapped volume between receptor and ligand in protein-ligand complex structures (PDB files) using the Monte Carlo method. It calculates the volume where atoms of both receptor and ligand are within their van der Waals radii of each other. AVOE is valuable in fields like molecular design, interaction analysis, and drug discovery for evaluating the steric complementarity between proteins and ligands.
@@ -184,7 +182,7 @@ The TSV files include the following columns (columns may vary based on calculati
 
 ## 8. License
 
-This project is licensed under the .
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 9. References
 
@@ -194,7 +192,7 @@ This project is licensed under the .
 ## 10. Authors
 
 - Kosuke Maruyama
-- Affiliation: [Your Department/Lab], [Your University Name]
+- Affiliation: Division of Genome Biology, National Cancer Center Japan/Depertment of Cancer Cellular Signaling, Graduate School of Medicine, The University of Tokyo
 - Contact: komaruya@ncc.go.jp
 
 ---
