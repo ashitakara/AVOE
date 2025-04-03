@@ -1,5 +1,11 @@
 
-# Not yet open to the public as it is currently being tested.
+## Associated Publication
+
+The code in this repository is associated with a scientific publication currently in preparation.
+
+If you use this code or find it helpful in your research, please cite the publication once it becomes available. We will update this README with the full citation details upon publication.
+
+Thank you!
 
 # Atomic Volume Overlap Estimator (AVOE)
 
