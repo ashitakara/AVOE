@@ -189,10 +189,10 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [PyMOL Documentation](https://pymolwiki.org/index.php/Main_Page)
 - [Biopython Documentation](https://biopython.org/)
 
-## 10. Authors
+## 10. Author
 
 - Kosuke Maruyama
-- Affiliation: Division of Genome Biology, National Cancer Center Japan/Depertment of Cancer Cellular Signaling, Graduate School of Medicine, The University of Tokyo
+- Affiliation: Division of Genome Biology, National Cancer Center Japan/Graduate School of Medicine, The University of Tokyo
 - Contact: komaruya@ncc.go.jp
 
 ---
