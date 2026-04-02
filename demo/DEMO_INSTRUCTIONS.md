@@ -33,7 +33,7 @@ demo/input/Vandetanib/
 
 - `expected_output/vdw.txt`
   - provided van der Waals radii file for the demo
-- `expected_output/1_100000.tsv`
+- `expected_output/10_100000.tsv`
   - overlap-volume results
 
 ### `output/`
@@ -102,7 +102,7 @@ python create_vdw_file.py   demo/input/Vandetanib/2ivu_cleaned_chainAB.pdb   dem
 From the repository root, run:
 
 ```bash
-python avoe.py   --ligand_file demo/input/ligand_list.txt   --vdw_file demo/expected_output/vdw.txt   --output_dir demo/output/   --receptor_chain A   --ligand_chain B   --pseudo_particles 100000
+python avoe.py   --ligand_file demo/input/ligand_list.txt   --vdw_file demo/expected_output/vdw.txt   --output_dir demo/output/   --receptor_chain A   --ligand_chain B   --pseudo_particles 100000 --num_cores 2 --repeat 10
 ```
 
 In this demo, `--ligand_file` specifies a text file listing the ligand-series directories to be processed.
@@ -114,7 +114,7 @@ Reference files are provided in `demo/expected_output/`.
 
 - `vdw.txt`
   - provided van der Waals radii file used for the demo
-- `1_100000.tsv`
+- `10_100000.tsv`
   - overlap-volume results
 
 The original AVOE program should write its native output files to `demo/output/`.
