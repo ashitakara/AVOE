@@ -27,7 +27,7 @@ Atomic Volume Overlap Estimator (AVOE) is a tool designed to estimate the overla
 
 ### 3.1 System requirements
 
-AVOE runs in a standard Python environment and does not require non-standard hardware.
+AVOE runs in a standard Python environment.
 
 #### Operating systems tested
 - Ubuntu 18.04 LTS
@@ -42,10 +42,6 @@ AVOE runs in a standard Python environment and does not require non-standard har
 - Biopython 1.79, 1.80
 - NumPy 1.21.6, 1.26.4
 - pandas 1.3.4, 1.3.5
-
-PyMOL is required only when van der Waals radii are retrieved dynamically. If a pre-calculated van der Waals radii file is supplied with `--vdw_file`, AVOE can be run without PyMOL.
-
-No non-standard hardware is required.
 
 ### 3.2 Installation steps
 
