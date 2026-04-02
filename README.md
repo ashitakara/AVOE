@@ -54,8 +54,6 @@ AVOE runs in a standard Python environment.
 4. **(Optional but Recommended) Prepare Van der Waals Radii File:**
    For improved performance, especially when processing multiple PDB files, it is highly recommended to use a pre-calculated van der Waals radii file. While `create_vdw_file.py` is provided as a convenient script to generate these files, you can use any method to create a file that conforms to the specified format (see Section 5.2, "Van der Waals Radii File"). Using a pre-calculated file significantly reduces computational cost during the main AVOE execution.
 
-Typical installation time on a standard desktop or workstation computer is less than 10 minutes, excluding installation of PyMOL.
-
 ### 3.3 Notes on environment
 
 AVOE is not operating-system specific and is expected to run in comparable Python environments with the dependencies listed above installed. The software was tested in the environments listed in Section 3.1.
