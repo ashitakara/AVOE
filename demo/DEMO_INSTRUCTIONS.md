@@ -121,7 +121,7 @@ The original AVOE program should write its native output files to `demo/output/`
 
 ## 7. Expected runtime
 
-Expected run time for the demo on a "normal" desktop computer: approximately 1 minute.
+Expected run time for the demo on a "normal" desktop computer: approximately 5 minutes.
 
 ## 8. Instructions for use on user data
 
