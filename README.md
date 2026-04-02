@@ -133,9 +133,9 @@ If you have the following structure:
 
 ```text
 input/ligandA/WT.pdb
-input/ligandA/V804A.pdb
+input/ligandA/G810S.pdb
 input/ligandB/WT.pdb
-input/ligandB/V804A.pdb
+input/ligandB/G810S.pdb
 ```
 
 you can prepare a list file such as:
@@ -199,7 +199,7 @@ input/ligandA/
 input/ligandB/
 ```
 
-In this example, each directory contains protein-ligand complex PDB files such as `WT.pdb` and `V804A.pdb`, and the directory name is used as the ligand name in the output.
+In this example, each directory contains protein-ligand complex PDB files such as `WT.pdb` and `G810S.pdb`, and the directory name is used as the ligand name in the output.
 
 ## 6. Output File Formats
 
@@ -217,7 +217,7 @@ AVOE outputs results in tab-separated values (TSV) files (`.tsv`).
 The TSV files include the following columns (columns may vary based on calculation area settings):
 
 - `ligand`: Ligand name
-- `mutation`: Mutation name extracted from the PDB filename. AVOE attempts to extract a mutation name from the input PDB filename using a regular expression to identify patterns like `[InitialAminoAcid][ResidueNumber][MutatedAminoAcid]` (e.g., `H274Y`). If a mutation name is successfully extracted, it is listed here. If no mutation pattern is found in the filename, or if the extracted name is "WT", then "WT" (Wild Type) is recorded.
+- `mutation`: Mutation name extracted from the PDB filename. AVOE attempts to extract a mutation name from the input PDB filename using a regular expression to identify patterns like `[InitialAminoAcid][ResidueNumber][MutatedAminoAcid]` (e.g., `G810S`). If a mutation name is successfully extracted, it is listed here. If no mutation pattern is found in the filename, or if the extracted name is "WT", then "WT" (Wild Type) is recorded.
 - `residue`: Residue number (only when calculation_area="per_residue")
 - `overlapping_volume`: Calculated overlapped volume (Å³)
 
