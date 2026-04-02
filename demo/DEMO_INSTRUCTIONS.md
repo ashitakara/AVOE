@@ -10,11 +10,11 @@ The demo input directory contains two ligand-series directories:
 
 - `input/ADN/`
   - `4ckj_cleaned_chainAB.pdb`
-  - `4ckj_cleaned_chainAB_G810S.pdb`
+  - `4ckj_cleaned_chainAB_G810R.pdb`
 
 - `input/Vandetanib/`
   - `2ivu_cleaned_chainAB.pdb`
-  - `2ivu_cleaned_chainAB_G810S.pdb`
+  - `2ivu_cleaned_chainAB_G810R.pdb`
 
 These PDB files were prepared from public PDB-derived structures.
 Unnecessary components were removed using PyMOL, and chain identifiers were reassigned so that:
@@ -33,10 +33,8 @@ demo/input/Vandetanib/
 
 - `expected_output/vdw.txt`
   - provided van der Waals radii file for the demo
-- `expected_output/overlap_volume.csv`
-  - reviewer-friendly reference output for overlap-volume results
-- `expected_output/summary.txt`
-  - short summary of the expected demo result
+- `expected_output/1_100000.tsv`
+  - overlap-volume results
 
 ### `output/`
 
@@ -76,13 +74,6 @@ bash Miniforge3-Linux-x86_64.sh
 source ~/.bashrc
 ```
 
-If shell initialization was skipped during installation, initialize conda manually:
-
-```bash
-~/miniforge3/bin/conda init bash
-source ~/.bashrc
-```
-
 ### 3.2 Create and activate the demo environment
 
 ```bash
@@ -98,20 +89,12 @@ Install PyMOL open-source and the required Python packages into the same environ
 mamba install -c conda-forge pymol-open-source biopython numpy pandas -y
 ```
 
-If `mamba` is not available, use:
-
-```bash
-conda install -c conda-forge pymol-open-source biopython numpy pandas -y
-```
-
 ## 4. Demo: generate the vdW radii file using `create_vdw_file.py`
 
 From the repository root, run:
 
 ```bash
-python create_vdw_file.py \
-  demo/input/Vandetanib/2ivu_cleaned_chainAB.pdb \
-  demo/output/vdw_generated.txt
+python create_vdw_file.py   demo/input/Vandetanib/2ivu_cleaned_chainAB.pdb   demo/output/vdw_generated.txt
 ```
 
 ## 5. Demo: run AVOE using `ligand_list.txt`
@@ -119,12 +102,7 @@ python create_vdw_file.py \
 From the repository root, run:
 
 ```bash
-python avoe.py \
-  --ligand_file demo/input/ligand_list.txt \
-  --vdw_file demo/expected_output/vdw.txt \
-  --output_dir demo/output/ \
-  --receptor_chain A \
-  --ligand_chain B
+python avoe.py   --ligand_file demo/input/ligand_list.txt   --vdw_file demo/expected_output/vdw.txt   --output_dir demo/output/   --receptor_chain A   --ligand_chain B   --pseudo_particles 100000
 ```
 
 In this demo, `--ligand_file` specifies a text file listing the ligand-series directories to be processed.
@@ -136,15 +114,14 @@ Reference files are provided in `demo/expected_output/`.
 
 - `vdw.txt`
   - provided van der Waals radii file used for the demo
-- `overlap_volume.tsv`
+- `1_100000.tsv`
   - overlap-volume results
 
 The original AVOE program should write its native output files to `demo/output/`.
 
 ## 7. Expected runtime
 
-On a standard desktop computer, the demo is expected to complete quickly.
-Typical runtime should be on the order of seconds to a few tens of seconds, depending on the environment and PyMOL startup overhead.
+Expected run time for the demo on a "normal" desktop computer: approximately 1 minute.
 
 ## 8. Instructions for use on user data
 
