@@ -1,4 +1,3 @@
-
 ## Associated Publication
 
 The code in this repository is associated with a scientific publication currently in preparation.
@@ -19,36 +18,57 @@ Atomic Volume Overlap Estimator (AVOE) is a tool designed to estimate the overla
 - **Flexible Calculation Area Definition:** Allows calculation of overlapped volume in areas around the ligand, specified residues, or on a per-residue basis.
 - **Van der Waals Radii Retrieval Options:**
     - **Automatic Retrieval via PyMOL:** AVOE can directly utilize PyMOL to retrieve van der Waals radii for atoms in PDB files.
-    - **Pre-calculated Radii File:** Users can provide a pre-calculated Van der Waals radii file.  While `create_vdw_file.py` is provided as a utility script to generate such files, **any file adhering to the specified format can be used**, offering significantly faster execution, especially when processing many PDB files.
+    - **Pre-calculated Radii File:** Users can provide a pre-calculated van der Waals radii file. While `create_vdw_file.py` is provided as a utility script to generate such files, **any file adhering to the specified format can be used**, offering significantly faster execution, especially when processing many PDB files.
 - **Parallel Processing for Enhanced Speed:** Supports multi-core parallel processing to efficiently analyze numerous PDB files.
 - **Detailed Output:** Provides overlapped volume, Monte Carlo simulation statistics, and computation time.
 - **Command-Line Interface:** Offers a flexible command-line interface with extensive options for customization.
 
 ## 3. Installation
 
-### 3.1 Dependencies
+### 3.1 System requirements
 
-AVOE requires the following Python libraries:
+AVOE runs in a standard Python environment and does not require non-standard hardware.
 
-- **Biopython:** For parsing PDB files.
-- **PyMOL:** For retrieving van der Waals radii (required if not using a pre-calculated radii file or if you choose dynamic retrieval).
-  - Installation instructions for PyMOL can be found on the [PyMOL website](https://pymol.org/).
-  - Ensure `pymol` is executable from your command line.
-- **NumPy:** For numerical computations.
-- **pandas:** For data frame handling and output of results.
+#### Operating systems tested
+- Ubuntu 18.04 LTS
+- Ubuntu 20.04 LTS
 
-### 3.2 Installation Steps
+#### Python versions tested
+- Python 3.7.12
+- Python 3.9.19
+
+#### Software dependencies tested
+- PyMOL 2.5.0
+- Biopython 1.79, 1.80
+- NumPy 1.21.6, 1.26.4
+- pandas 1.3.4, 1.3.5
+
+PyMOL is required only when van der Waals radii are retrieved dynamically. If a pre-calculated van der Waals radii file is supplied with `--vdw_file`, AVOE can be run without PyMOL.
+
+No non-standard hardware is required.
+
+### 3.2 Installation steps
 
 1. **Download AVOE Scripts:**
    Download `avoe.py` and `create_vdw_file.py` and save them to a suitable directory.
-2. **Install Dependencies:** Install the required libraries.
-3. **(Optional but Recommended) Prepare Van der Waals Radii File:** For improved performance, especially when processing multiple PDB files, it is highly recommended to use a pre-calculated Van der Waals radii file. While `create_vdw_file.py` is provided as a convenient script to generate these files, you can use any method to create a file that conforms to the specified format (see Section 5.2 "Van der Waals Radii File"). Using a pre-calculated file significantly reduces computational cost during the main AVOE execution.
+2. **Install Dependencies:**
+   Install the required Python packages in your environment.
+3. **PyMOL Setup (if needed):**
+   Ensure `pymol` is executable from your command line if you plan to retrieve van der Waals radii dynamically.
+4. **(Optional but Recommended) Prepare Van der Waals Radii File:**
+   For improved performance, especially when processing multiple PDB files, it is highly recommended to use a pre-calculated van der Waals radii file. While `create_vdw_file.py` is provided as a convenient script to generate these files, you can use any method to create a file that conforms to the specified format (see Section 5.2, "Van der Waals Radii File"). Using a pre-calculated file significantly reduces computational cost during the main AVOE execution.
+
+Typical installation time on a standard desktop or workstation computer is less than 10 minutes, excluding installation of PyMOL.
+
+### 3.3 Notes on environment
+
+AVOE is not operating-system specific and is expected to run in comparable Python environments with the dependencies listed above installed. The software was tested in the environments listed in Section 3.1.
 
 ## 4. Usage
 
 ### 4.1 Preparation: Creating Van der Waals Radii File (Using `create_vdw_file.py` Utility)
 
-To enhance the efficiency of AVOE, it's recommended to use a pre-calculated Van der Waals radii file.  `create_vdw_file.py` is provided as a utility script to easily generate such a file from a PDB structure.
+To enhance the efficiency of AVOE, it's recommended to use a pre-calculated van der Waals radii file. `create_vdw_file.py` is provided as a utility script to easily generate such a file from a PDB structure.
 
 **Command (using `create_vdw_file.py`):**
 
@@ -69,7 +89,7 @@ python create_vdw_file.py <input_pdb_file> <output_file> [--chain_id <chain_id>]
 python create_vdw_file.py receptor.pdb vdw_radii.txt --chain_id A
 ```
 
-This command uses `create_vdw_file.py` to extract Van der Waals radii from `receptor.pdb` (chain A only) and saves them to `vdw_radii.txt`. You can then use `vdw_radii.txt` with the `--vdw_file` option in `avoe.py` for faster calculations.
+This command uses `create_vdw_file.py` to extract van der Waals radii from `receptor.pdb` (chain A only) and saves them to `vdw_radii.txt`. You can then use `vdw_radii.txt` with the `--vdw_file` option in `avoe.py` for faster calculations.
 
 ### 4.2 Running AVOE (`avoe.py`)
 
@@ -85,7 +105,7 @@ python avoe.py [options]
 
 - `--ligand <ligand_pdb_file or directory>`: Path to a single ligand PDB file or a directory containing ligand PDB files. If a directory is specified, all PDB files within it will be processed. The directory name will be used as the ligand name.
 - `--ligand_file <ligand_list_file>`: Path to a text file listing ligand PDB files or directories, one path per line. Cannot be used with `--ligand`. If neither `--ligand` nor `--ligand_file` is specified, AVOE will search for PDB files in the current directory and its subdirectories.
-- `--vdw_file <van_der_waals_radii_file>`: Path to a pre-calculated Van der Waals radii file. **Using a pre-calculated file, generated either by `create_vdw_file.py` or any other method that produces a file in the correct format, is highly recommended for reducing computational cost and speeding up calculations, especially when processing multiple PDB files.** If provided, AVOE will use this file instead of dynamically retrieving radii (which may involve calling PyMOL).
+- `--vdw_file <van_der_waals_radii_file>`: Path to a pre-calculated van der Waals radii file. **Using a pre-calculated file, generated either by `create_vdw_file.py` or any other method that produces a file in the correct format, is highly recommended for reducing computational cost and speeding up calculations, especially when processing multiple PDB files.** If provided, AVOE will use this file instead of dynamically retrieving radii (which may involve calling PyMOL).
 - `--output_dir <output_directory>`: Directory to save output files. Default is `./output/`.
 - `--pseudo_particles <number_of_pseudo_particles>`: Number of pseudo-particles for Monte Carlo simulation. Default is `10000`. Increasing this number improves accuracy but also increases computation time.
 - `--repeat <number_of_repeats>`: Number of times to repeat the Monte Carlo calculation. Default is `1`. Repeating multiple times allows for assessing the statistical reliability of the results.
@@ -109,7 +129,7 @@ python avoe.py [options]
 python avoe.py --ligand ligand_dir --vdw_file vdw_radii.txt --output_dir output_avoe --pseudo_particles 5000 --repeat 3 --num_cores 4 --verbose
 ```
 
-This command calculates the overlapped volume for PDB files in `ligand_dir`, utilizing the Van der Waals radii from `vdw_radii.txt`.  This file could have been generated by `create_vdw_file.py` or created manually, as long as it adheres to the correct format. The calculation is performed with 5000 pseudo-particles, 3 repeats, utilizing 4 CPU cores, and saves results to `output_avoe` directory.
+This command calculates the overlapped volume for PDB files in `ligand_dir`, utilizing the van der Waals radii from `vdw_radii.txt`. This file could have been generated by `create_vdw_file.py` or created manually, as long as it adheres to the correct format. The calculation is performed with 5000 pseudo-particles, 3 repeats, utilizing 4 CPU cores, and saves results to `output_avoe` directory.
 
 ## 5. Input File Formats
 
@@ -119,9 +139,9 @@ AVOE accepts standard PDB (Protein Data Bank) format files as input. It reads at
 
 ### 5.2 Van der Waals Radii File
 
-The Van der Waals radii file is a plain text file that specifies the Van der Waals radius for each atom type. The file must be formatted such that each line contains an atom name (e.g., C, N, O) and its corresponding Van der Waals radius (in Ångströms), separated by a tab. While `create_vdw_file.py` is provided to help generate files in this format, you can create this file using any method, as long as it adheres to this structure.
+The van der Waals radii file is a plain text file that specifies the van der Waals radius for each atom type. The file must be formatted such that each line contains an atom name (e.g., C, N, O) and its corresponding van der Waals radius (in Ångströms), separated by a tab. While `create_vdw_file.py` is provided to help generate files in this format, you can create this file using any method, as long as it adheres to this structure.
 
-**Example (vdw_radii.txt):**
+**Example (`vdw_radii.txt`):**
 
 ```
 C       1.7
@@ -132,12 +152,11 @@ H       1.2
 ...
 ```
 
-
 ### 5.3 Residue List File
 
 The residue list file is a text file required when `--calculation_area` is set to `residues` or `per_residue`. Each line should contain a residue number for calculation.
 
-**Example (residue_list.txt):**
+**Example (`residue_list.txt`):**
 
 ```
 274
@@ -149,7 +168,7 @@ The residue list file is a text file required when `--calculation_area` is set t
 
 The ligand list file is used with the `--ligand_file` option. It's a text file with each line specifying a path to a ligand PDB file or a directory containing ligand PDB files.
 
-**Example (ligand_list.txt):**
+**Example (`ligand_list.txt`):**
 
 ```
 ligand_pdbs/ligand1.pdb
